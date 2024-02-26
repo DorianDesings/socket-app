@@ -1,0 +1,32 @@
+{
+	"name": "plantilla-react",
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"format": "prettier --write .",
+		"lint": "eslint . --ext .js,.jsx --fix"
+	},
+	"type": "module",
+	"dependencies": {
+		"js-cookie": "^3.0.5",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-router-dom": "^6.21.3",
+		"uuid": "9.0.1"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-react": "4.2.1",
+		"eslint": "8.56.0",
+		"eslint-config-prettier": "9.1.0",
+		"eslint-config-standard": "17.1.0",
+		"eslint-plugin-import": "2.29.1",
+		"eslint-plugin-n": "16.6.2",
+		"eslint-plugin-promise": "6.1.1",
+		"eslint-plugin-react": "7.33.2",
+		"prettier": "3.2.4",
+		"styled-components": "^6.1.8",
+		"vite": "5.0.12"
+	}
+}
