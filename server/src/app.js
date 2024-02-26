@@ -1,28 +1,29 @@
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 const app = express();
 
-const { corsOptions } = require('./config/cors.config');
-const userRoutes = require('./routes/user.routes');
-const { databaseConnect } = require('./database/database');
-const authRoutes = require('./routes/auth.routes');
-require('dotenv').config();
+const { Server } = require('socket.io');
+const establishSocketConnection = require('./socket-controller/socket-controller');
 
-// Rutas
+const server = require('http').Server(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: '*'
+  }
+});
 
 // Middlewares para cliente
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
 
-// Uso de rutas
-// app.use('/api/users', userRoutes);
-// app.use('/auth', authRoutes);
+io.on('connection', socket => {
+  establishSocketConnection(socket, io);
+});
 
 const startServer = () => {
-  databaseConnect();
   app.listen(3000, () => console.log('Servidor en ejecución en el puerto 3000'));
+  server.listen(4000, () => console.log('Servidor Socket en ejecución en el puerto 4000'));
 };
 
 startServer();
