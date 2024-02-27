@@ -6,18 +6,24 @@ const GlobalStyles = createGlobalStyle`
   *::before{
     box-sizing: border-box;
   }
+  
   img{
     display: block;
     max-width: 100%;
   }
+  
   body{
     margin: 0;
     font-family: sans-serif;
+    color: aliceblue;
+    background-color: rgb(14, 20, 27);
   }
+
   a{
     text-decoration: none;
     color: inherit;
   }
+
   ul{
     list-style: none;
     margin-top: 0;
