@@ -17,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: sans-serif;
     color: aliceblue;
     background-color: rgb(14, 20, 27);
+    min-width: 375px;
   }
 
   a{

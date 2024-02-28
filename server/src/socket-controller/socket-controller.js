@@ -4,6 +4,9 @@ let chatUsers = [];
 const addUser = (socket, io, username) => {
   // Asociar el nombre de usuario con el ID del socket
   socket.username = username;
+  socket.color = generateRandomPastelColor();
+
+  console.log(socket.color);
 
   chatUsers.push({ id: socket.id, username: socket.username });
   console.log(`Nuevo usuario: ${username}`);
@@ -35,13 +38,25 @@ const establishSocketConnection = (socket, io) => {
   // Recibir mensaje
   socket.on('send message', message => {
     console.log(message);
-    io.emit('new message', { id: v4(), senderId: socket.id, text: message, username: socket.username });
+    io.emit('new message', { id: v4(), senderId: socket.id, text: message, username: socket.username, color: socket.color });
   });
 
   // Manejar la desconexión del usuario
   socket.on('disconnect', () => {
     handleDisconnect(socket, io);
   });
+};
+
+const generateRandomPastelColor = () => {
+  // Componentes RGB en tonos pastel
+  const r = Math.floor(Math.random() * 128);
+  const g = Math.floor(Math.random() * 128);
+  const b = Math.floor(Math.random() * 128);
+
+  // Convertir a formato hexadecimal
+  const color = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+
+  return color;
 };
 
 module.exports = establishSocketConnection;

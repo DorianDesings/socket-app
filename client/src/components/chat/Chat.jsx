@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Form from '../../form/Form';
 import { socket } from '../../sockets/socket';
 import Messages from '../messages/Messages';
 import UsersList from '../users-list/UsersList';
-import {
-	StyledButton,
-	StyledChat,
-	StyledChatContainer,
-	StyledForm,
-	StyledInput
-} from './styles';
+import { StyledChat, StyledChatContainer } from './styles';
 
 const Chat = () => {
 	const [users, setUsers] = useState([]);
@@ -36,20 +31,10 @@ const Chat = () => {
 			<UsersList users={users} />
 			<StyledChatContainer>
 				<Messages messages={messages} socketId={socket.id} />
-				<StyledForm onSubmit={handleMessage}>
-					<StyledInput type='text' name='message' />
-					<StyledButton>Send</StyledButton>
-				</StyledForm>
 			</StyledChatContainer>
+			<Form />
 		</StyledChat>
 	);
-};
-
-const handleMessage = event => {
-	event.preventDefault();
-	const message = event.target.message.value;
-	socket.emit('send message', message);
-	event.target.reset();
 };
 
 const handleUpdateMessages = (data, setMessages) => {

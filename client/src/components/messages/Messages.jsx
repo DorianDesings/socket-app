@@ -6,7 +6,6 @@ const Messages = ({ messages, socketId }) => {
 			{messages.map(message => {
 				const isMine = socketId === message.senderId;
 				const autoMessage = !message.username;
-				console.log(autoMessage);
 				return (
 					<div key={message.id}>
 						{autoMessage && <span>{message.text}</span>}
@@ -17,7 +16,7 @@ const Messages = ({ messages, socketId }) => {
 							</StyledMessageOwn>
 						)}
 						{!autoMessage && !isMine && (
-							<StyledMessageOther>
+							<StyledMessageOther $color={message.color}>
 								{message.username}: {message.text}
 							</StyledMessageOther>
 						)}
